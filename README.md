@@ -85,3 +85,59 @@ Using the persistent [systemd](https://wiki.archlinux.org/index.php/systemd#Basi
 
 ## License
 FreeBSD
+====================================================
+WiFi repeater with a single WiFi adapter in Debian
+
+
+up vote
+2
+down vote
+favorite
+1
+Is it possible to create a WiFi repeater with a single WiFi adapter in Debian , to increase the range of my WiFi network?
+
+debian wifi
+shareimprove this question
+edited Jan 28 at 16:41
+
+GAD3R
+15.2k103174
+asked Jan 28 at 16:15
+
+Nathan
+135
+  	 	
++GAD3R Sorry I'm not sure what you would call it. Maybe a WiFi booster? Something which connects to a WiFi network and acts as a second access point to that network. Essentially extending the range of the WiFi network. – Nathan Jan 28 at 16:33
+  	 	
+e,g: create a WiFi hotspot from the same wifi card ? can be helpful ? – GAD3R Jan 28 at 16:35
+1	 	
+Yes, connect to a WiFi network and create a hotspot on the same WiFi adapter. – Nathan Jan 28 at 16:37
+1	 	
+As a side-note, a wifi adapter can only use on a single channel at a time, which means the AP will use the same frequency on both sides, thus cause interference with its source. It may not be that bad but it will surely lower the maximum wifi bandwidth. – Julie Pelletier Jan 28 at 17:50
+  	 	
+@JuliePelletier Interesting, thanks for the info. – Nathan Jan 28 at 18:15
+add a comment
+1 Answer
+active oldest votes
+up vote
+3
+down vote
+accepted
+To increase the range of your WiFi network, you can create an access point from the same wifi card.
+
+Install the required packages
+
+apt-get install build-essential git
+Install create_ap:
+
+git clone https://github.com/oblique/create_ap
+cd create_ap
+make install
+Start the service and enable it :
+
+systemctl start create_ap
+systemctl enable create_ap
+To create an AP :
+
+Internet sharing from the same WiFi interface:
+create_ap wlan0 wlan0 MyAccessPoint MyPassPhrase
